@@ -14,10 +14,15 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the header, home page, conference list, and footer in order', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, prosit1');
+    expect(Array.from(compiled.children).map((element) => element.tagName.toLowerCase())).toEqual([
+      'app-header',
+      'app-home',
+      'app-list-conf',
+      'app-footer',
+    ]);
   });
 });
