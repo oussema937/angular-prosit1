@@ -1,21 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule, UpperCasePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
-  title : string;
-  state: boolean;
-  constructor() {
-    this.title='home 4DAS 10';
-    this.state=true;
-  }
-  change(){
-    this.title='home 4DAS 9';
-    this.state=false;
+export class Home implements OnInit {
+
+  list: Conference[] = [];
+  searchTitle: string = '';
+
+  ngOnInit(): void {
+    this.list = [
+      {
+        title: 'Conference Angular',
+        description: 'Web dev conference and workshop',
+        date: '2026-11-20',
+        nbrMax: 20,
+        nbrReservation: 5,
+        picture: 'https://placehold.co/600x350?text=Angular'
+      },
+      {
+        title: 'Conference AI',
+        description: 'Introduction to machine learning and its uses',
+        date: '2026-11-25',
+        nbrMax: 15,
+        nbrReservation: 15,
+        picture: 'https://placehold.co/600x350?text=AI'
+      },
+      {
+        title: 'Conference Cloud',
+        description: 'Cloud services, deployment and DevOps',
+        date: '2026-11-30',
+        nbrMax: 10,
+        nbrReservation: 4,
+        picture: 'https://placehold.co/600x350?text=Cloud'
+      }
+    ];
   }
 
+  participate(conf: Conference): void {
+     
+      conf.nbrReservation++;
+    
+  }
 }
